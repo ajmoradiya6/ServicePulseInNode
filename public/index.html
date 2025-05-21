@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Pulse</title>
+    <link href="/styles.css" rel="stylesheet">
+    <!-- Add Heroicons via CDN -->
+    <script src="https://unpkg.com/@heroicons/v1/outline"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen">
+        <!-- Resizable Sidebar -->
+        <div class="relative w-72 bg-white border-r border-gray-200" id="sidebar">
+            <div class="absolute right-0 top-0 bottom-0 w-px cursor-col-resize bg-gray-200 hover:bg-blue-500 transition-colors duration-200" id="resizer"></div>
+            
+            <!-- Sidebar Content -->
+            <div class="p-4">
+                <div class="flex items-center justify-between mb-8">
+                    <h1 class="text-xl font-semibold text-gray-800">Service Pulse</h1>
+                    <button id="addServiceBtn" class="p-1 rounded-md hover:bg-gray-100">
+                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Services List -->
+                <div id="servicesList" class="space-y-2">
+                    <!-- Services will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 p-8">
+            <!-- Content will be added here -->
+        </div>
+    </div>
+
+    <!-- Modals and Context Menus container -->
+    <div id="overlay-container"></div>
+
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/context-menu.js"></script>
+    <script src="/js/service-item.js"></script>
+    <script src="/js/add-service-modal.js"></script>
+    
+    <script>
+        // Main script to load initial data and components
+        document.addEventListener('DOMContentLoaded', async () => {
+            const overlayContainer = document.getElementById('overlay-container');
+
+            // Load HTML partials
+            async function loadHTML(url) {
+                try {
+                    const response = await fetch(url);
+                    if (response.ok) {
+                        return await response.text();
+                    } else {
+                        console.error(`Failed to load ${url}`);
+                        return '';
+                    }
+                } catch (error) {
+                    console.error(`Error loading ${url}:`, error);
+                    return '';
+                }
+            }
+
+            // Load and append modal HTML
+            const modalHTML = await loadHTML('/components/add-service-modal.html');
+            if (overlayContainer) {
+                 overlayContainer.innerHTML += modalHTML;
+            }
+
+            // Initialize components after HTML is in the DOM
+            const servicesListElement = document.getElementById('servicesList');
+            const addServiceBtnElement = document.getElementById('addServiceBtn');
+
+            if (servicesListElement && addServiceBtnElement) {
+                // Assuming init functions are exposed globally by component scripts
+                if (typeof initAddServiceModal === 'function') {
+                    initAddServiceModal(addServiceBtnElement, servicesListElement);
+                }
+                 if (typeof initContextMenu === 'function') {
+                    initContextMenu(servicesListElement); // Context menu needs access to servicesList for positioning
+                }
+                 if (typeof initServiceItem === 'function') {
+                    // initServiceItem might not be necessary as createServiceItem is used directly
+                    // But we can use an init function here if needed for global setup
+                }
+            }
+
+            // Load existing services using the globally available function
+            if (typeof loadServices === 'function') {
+                 loadServices();
+            }
+        });
+    </script>
+</body>
+</html> 
