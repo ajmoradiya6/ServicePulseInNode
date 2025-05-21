@@ -7,13 +7,12 @@
  */
 function createServiceItem(service, showContextMenu) {
     const serviceElement = document.createElement('div');
-    serviceElement.className = 'flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 group';
+    serviceElement.className = 'flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 group cursor-pointer';
     serviceElement.innerHTML = `
-        <div class="flex items-center space-x-2">
-            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
-            </svg>
-            <span class="text-gray-700">${service.name}</span>
+        <div class="flex items-center space-x-2 flex-1 min-w-0">
+            <!-- Gray dot icon -->
+            <div class="w-2 h-2 bg-gray-500 rounded-full"></div>
+            <span class="text-gray-700 truncate">${service.name}</span>
         </div>
         <button class="p-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity" data-id="${service.id}">
             <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -24,10 +23,27 @@ function createServiceItem(service, showContextMenu) {
 
     // Add event listener to the options button
     const optionsButton = serviceElement.querySelector('button');
+    // Add cursor-pointer class to the button
+    optionsButton.classList.add('cursor-pointer');
+    
     optionsButton.addEventListener('click', (e) => {
         e.stopPropagation(); // Prevent the service item click from happening
         showContextMenu(e.target, service.id);
     });
+
+    // Add click listener to the service item for active state
+    serviceElement.addEventListener('click', () => {
+        // Remove 'active' class from any currently active service
+        const currentActive = document.querySelector('.service-item.active');
+        if (currentActive) {
+            currentActive.classList.remove('active');
+        }
+        // Add 'active' class to the clicked service
+        serviceElement.classList.add('active');
+    });
+
+    // Add a class to the service element for easier selection
+    serviceElement.classList.add('service-item');
 
     return serviceElement;
 }
