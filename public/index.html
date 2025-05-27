@@ -141,14 +141,21 @@
             <div class="absolute right-0 top-0 bottom-0 w-px cursor-col-resize bg-gray-200 hover:bg-blue-500 transition-colors duration-200" id="resizer"></div>
             
             <!-- Sidebar Content -->
-            <div class="p-4">
-                <div class="flex items-center justify-between mb-8">
+            <div class="p-4 pb-0">
+                <!-- Heading and Add Service Button -->
+                <div class="flex items-center justify-between mb-4">
                     <h1 class="text-xl font-semibold text-gray-800">Service Pulse</h1>
                     <button id="addServiceBtn" class="p-1 rounded-md hover:bg-gray-100">
                         <i data-lucide="plus" class="w-5 h-5 text-gray-700"></i>
                     </button>
                 </div>
+            </div>
 
+            <!-- Horizontal line -->
+            <hr class="border-gray-300 my-4">
+
+            <!-- Content Below Line -->
+            <div class="p-4 pt-0">
                 <!-- Services List -->
                 <div id="servicesList" class="space-y-2">
                     <!-- Services will be added here dynamically -->
@@ -160,18 +167,24 @@
         <div class="flex-1 p-8">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-2xl font-semibold text-gray-800">Service Health Monitor</h2>
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-6">
                     <!-- Live indicator -->
-                    <span class="flex items-center text-sm text-green-600">
+                    <span class="flex items-center text-sm text-green-600 bg-green-100 rounded-full px-3 py-1">
                         <i data-lucide="zap" class="w-4 h-4 mr-1"></i>
                         Live
                     </span>
                     <!-- Notification icon -->
-                    <i data-lucide="bell" class="w-6 h-6 text-gray-500 hover:text-gray-700 cursor-pointer"></i>
+                    <span class="flex items-center justify-center cursor-pointer p-2 rounded-md hover:bg-gray-100">
+                      <i data-lucide="bell" class="w-4 h-5 text-gray-500 hover:text-gray-700"></i>
+                    </span>
                     <!-- Moon icon -->
-                    <i data-lucide="moon" class="w-6 h-6 text-gray-500 hover:text-gray-700 cursor-pointer"></i>
+                    <span class="flex items-center justify-center cursor-pointer p-2 rounded-md hover:bg-gray-100">
+                      <i data-lucide="moon" class="w-4 h-5 text-gray-500 hover:text-gray-700"></i>
+                    </span>
                     <!-- Settings icon -->
-                    <i data-lucide="settings" class="w-6 h-6 text-gray-500 hover:text-gray-700 cursor-pointer"></i>
+                    <span class="flex items-center justify-center cursor-pointer p-2 rounded-md hover:bg-gray-100">
+                      <i data-lucide="settings" class="w-4 h-5 text-gray-500 hover:text-gray-700"></i>
+                    </span>
                 </div>
             </div>
 
