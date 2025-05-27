@@ -68,14 +68,15 @@ function showContextMenu(target, serviceId) {
         const action = e.target.closest('[data-action]')?.dataset.action;
         if (!action) return;
 
-        const serviceElement = document.querySelector(`[data-id="${currentServiceId}"]`).closest('.flex.items-center.justify-between');
+        // Pass serviceId directly to handlers
+        const serviceElement = document.querySelector(`[data-id="${serviceId}"]`).closest('.flex.items-center.justify-between');
         
         switch (action) {
             case 'edit':
-                await handleEdit(serviceElement);
+                await handleEdit(serviceElement, serviceId); // Pass serviceId to handleEdit
                 break;
             case 'delete':
-                await handleDelete(serviceElement);
+                await handleDelete(serviceElement, serviceId); // Pass serviceId to handleDelete
                 break;
         }
         
@@ -151,7 +152,10 @@ async function loadServices() {
 }
 
 // Call loadServices on page load
-document.addEventListener('DOMContentLoaded', loadServices);
+document.addEventListener('DOMContentLoaded', () => {
+    loadServices();
+    lucide.createIcons(); // Render Lucid icons
+});
 
 // Add Service Modal Functionality
 const addServiceBtn = document.getElementById('addServiceBtn');
@@ -219,7 +223,7 @@ if (serviceForm) {
     });
 }
 
-async function handleDelete(serviceElement) {
+async function handleDelete(serviceElement, serviceId) {
     const deleteModal = document.getElementById('deleteModal');
     const confirmDeleteBtn = document.getElementById('confirmDelete');
     const cancelDeleteBtn = document.getElementById('cancelDelete');
@@ -232,14 +236,14 @@ async function handleDelete(serviceElement) {
     confirmDeleteBtn.onclick = async () => {
         deleteModal.classList.add('hidden');
         try {
-            const response = await fetch(`/api/services/${currentServiceId}`, {
+            const response = await fetch(`/api/services/${serviceId}`, {
                 method: 'DELETE',
             });
 
             if (response.ok) {
                 // Service deleted successfully, remove the element from the DOM
                 serviceElement.remove();
-                console.log(`Service with ID ${currentServiceId} deleted.`);
+                console.log(`Service with ID ${serviceId} deleted.`);
             } else {
                 throw new Error('Failed to delete service');
             }
@@ -265,11 +269,8 @@ async function handleDelete(serviceElement) {
     };
 }
 
-async function handleEdit(serviceElement) {
+async function handleEdit(serviceElement, serviceId) {
     try {
-        // Get the service data from the element's data attributes
-        const serviceId = currentServiceId;
-        
         // Create edit modal
         const modal = document.createElement('div');
         modal.id = 'editServiceModal';

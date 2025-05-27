@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Add Heroicons via CDN (used in main content) -->
     <script src="https://unpkg.com/@heroicons/v1/outline"></script>
+    <!-- Add Lucid Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* Consolidated Service Item Styles */
         .service-item {
@@ -143,9 +145,7 @@
                 <div class="flex items-center justify-between mb-8">
                     <h1 class="text-xl font-semibold text-gray-800">Service Pulse</h1>
                     <button id="addServiceBtn" class="p-1 rounded-md hover:bg-gray-100">
-                        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                        </svg>
+                        <i data-lucide="plus" class="w-5 h-5 text-gray-700"></i>
                     </button>
                 </div>
 
@@ -163,24 +163,15 @@
                 <div class="flex items-center space-x-4">
                     <!-- Live indicator -->
                     <span class="flex items-center text-sm text-green-600">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
+                        <i data-lucide="zap" class="w-4 h-4 mr-1"></i>
                         Live
                     </span>
                     <!-- Notification icon -->
-                    <svg class="w-6 h-6 text-gray-500 hover:text-gray-700 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.405L4 17h5m6 0a6.002 6.002 0 00-4 0m.062 3.544a2.004 2.004 0 01-3.174 0M20 12H4"/>
-                    </svg>
+                    <i data-lucide="bell" class="w-6 h-6 text-gray-500 hover:text-gray-700 cursor-pointer"></i>
                     <!-- Moon icon -->
-                    <svg class="w-6 h-6 text-gray-500 hover:text-gray-700 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                    </svg>
+                    <i data-lucide="moon" class="w-6 h-6 text-gray-500 hover:text-gray-700 cursor-pointer"></i>
                     <!-- Settings icon -->
-                    <svg class="w-6 h-6 text-gray-500 hover:text-gray-700 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
+                    <i data-lucide="settings" class="w-6 h-6 text-gray-500 hover:text-gray-700 cursor-pointer"></i>
                 </div>
             </div>
 
@@ -222,9 +213,7 @@
                 <div class="flex justify-between items-center px-4 py-3 border-b border-gray-200">
                     <h3 class="text-lg font-semibold text-gray-900">Add New Service</h3>
                     <button id="closeModal" class="p-1 rounded-md hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
+                        <i data-lucide="x" class="w-5 h-5"></i>
                     </button>
                 </div>
                 <form id="serviceForm" class="p-4 space-y-4">
@@ -263,21 +252,15 @@
         <!-- Service Context Menu -->
         <div id="serviceContextMenu" class="absolute z-10 w-40 bg-white rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 focus:outline-none hidden">
             <a href="#" class="flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 rounded-sm" data-action="rename">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-                </svg>
+                <i data-lucide="edit" class="w-4 h-4 mr-2"></i>
                 Rename
             </a>
             <a href="#" class="flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 rounded-sm" data-action="edit">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                </svg>
+                <i data-lucide="pencil" class="w-4 h-4 mr-2"></i>
                 Edit
             </a>
             <a href="#" class="flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 rounded-sm" data-action="delete">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456-.45a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m-1.022.165L5.93 19.673a2.25 2.25 0 002.244 2.077h7.132a2.25 2.25 0 002.244-2.077L19.58 5.345zm-11.405-1.59.342-1.023a1.125 1.125 0 012.012 0l.342 1.023a1.125 1.125 0 01-2.012 0zm-.163 4.924l-.001.002-.002.002zm-.75 0l-.001.002-.002.002z"/>
-                </svg>
+                <i data-lucide="trash" class="w-4 h-4 mr-2"></i>
                 Delete
             </a>
         </div>
@@ -289,9 +272,7 @@
             <div class="flex justify-between items-center px-4 py-3 border-b border-gray-200">
                 <h3 class="text-lg font-semibold text-gray-900">Confirm Deletion</h3>
                 <button id="closeDeleteModal" class="p-1 rounded-md hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
+                    <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
             <div class="p-4 space-y-4">

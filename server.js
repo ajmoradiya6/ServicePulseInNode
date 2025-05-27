@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const { readServices, writeServices } = require('./utils/propertiesHandler');
+const { readServices, writeServices, deleteService } = require('./utils/propertiesHandler');
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -46,11 +46,9 @@ app.post('/api/services', (req, res) => {
     }
 });
 
-app.delete('/api/services/:id', (req, res) => {
-    const services = readServices();
-    const filteredServices = services.filter(service => service.id !== req.params.id);
-    
-    if (writeServices(filteredServices)) {
+app.delete('/api/services/:id', async (req, res) => {
+    const serviceId = req.params.id;
+    if (await deleteService(serviceId)) {
         res.json({ success: true });
     } else {
         res.status(500).json({ error: 'Failed to delete service' });
