@@ -188,7 +188,12 @@ if (serviceForm) {
         e.preventDefault();
 
         const formData = new FormData(serviceForm);
-        const serviceData = Object.fromEntries(formData.entries());
+        // Map form data to expected server-side structure
+        const serviceData = {
+            name: formData.get('serviceName'),
+            url: formData.get('serviceUrl'),
+            port: formData.get('portNumber')
+        };
 
         try {
             const response = await fetch('/api/services', {
@@ -215,26 +220,49 @@ if (serviceForm) {
 }
 
 async function handleDelete(serviceElement) {
-    if (!confirm('Are you sure you want to delete this service?')) {
-        return;
-    }
+    const deleteModal = document.getElementById('deleteModal');
+    const confirmDeleteBtn = document.getElementById('confirmDelete');
+    const cancelDeleteBtn = document.getElementById('cancelDelete');
+    const closeDeleteModalBtn = document.getElementById('closeDeleteModal');
 
-    try {
-        const response = await fetch(`/api/services/${currentServiceId}`, {
-            method: 'DELETE',
-        });
+    // Show the modal
+    deleteModal.classList.remove('hidden');
 
-        if (response.ok) {
-            // Service deleted successfully, remove the element from the DOM
-            serviceElement.remove();
-            console.log(`Service with ID ${currentServiceId} deleted.`);
-        } else {
-            throw new Error('Failed to delete service');
+    // Handle confirm delete
+    confirmDeleteBtn.onclick = async () => {
+        deleteModal.classList.add('hidden');
+        try {
+            const response = await fetch(`/api/services/${currentServiceId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                // Service deleted successfully, remove the element from the DOM
+                serviceElement.remove();
+                console.log(`Service with ID ${currentServiceId} deleted.`);
+            } else {
+                throw new Error('Failed to delete service');
+            }
+        } catch (error) {
+            console.error('Error deleting service:', error);
+            alert('Failed to delete service.');
         }
-    } catch (error) {
-        console.error('Error deleting service:', error);
-        alert('Failed to delete service.');
-    }
+    };
+
+    // Handle cancel delete or close modal
+    const closeModal = () => {
+        deleteModal.classList.add('hidden');
+    };
+
+    cancelDeleteBtn.onclick = closeModal;
+    closeDeleteModalBtn.onclick = closeModal;
+
+    // Close modal if clicking outside
+    deleteModal.onclick = (e) => {
+        if (e.target === deleteModal) {
+            closeModal();
+        }
+    };
 }
 
 async function handleEdit(serviceElement) {
@@ -328,8 +356,8 @@ async function handleEdit(serviceElement) {
 
                         if (response.ok) {
                             const updatedService = await response.json();
-                            // Update the service element
-                            serviceElement.querySelector('span').textContent = updatedService.name;
+                            // Update the service element's name
+                            serviceElement.querySelector('.service-name').textContent = updatedService.name;
                             modal.remove();
                         } else {
                             throw new Error('Failed to update service');
