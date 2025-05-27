@@ -78,7 +78,16 @@ const componentStyles = {
             background-color: #f5f5f5;
         }
         .service-item.active {
-            background-color: #e6f3ff;
+            background-color: #2196F3;
+        }
+        .service-item.active .service-name {
+            color: white;
+        }
+        .service-item.active .service-dot {
+            background-color: white;
+        }
+        .service-item.active .material-icons {
+            color: white;
         }
         .service-info {
             display: flex;
@@ -98,12 +107,21 @@ const componentStyles = {
             margin-left: 8px;
         }
         .options-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 4px;
             border: none;
             background: none;
             cursor: pointer;
             opacity: 0;
             transition: opacity 0.2s;
+            height: 24px;
+            width: 24px;
+            border-radius: 4px;
+        }
+        .options-button:hover {
+            background-color: rgba(0, 0, 0, 0.05);
         }
         .service-item:hover .options-button {
             opacity: 1;
@@ -115,6 +133,7 @@ const componentStyles = {
             border-radius: 6px;
             padding: 4px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
         .menu-item {
             display: flex;
