@@ -121,7 +121,7 @@ const componentStyles = {
             border-radius: 4px;
         }
         .options-button:hover {
-            background-color: rgba(0, 0, 0, 0.05);
+            /* background-color: rgba(0, 0, 0, 0.05); */ /* Removed hover background */
         }
         .service-item:hover .options-button {
             opacity: 1;
@@ -155,6 +155,33 @@ const componentStyles = {
             font-size: 20px;
             margin-right: 8px;
             color: #666;
+        }
+
+        /* Styles for health metrics display */
+        #healthMetrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .health-card {
+            padding: 15px;
+            margin: 10px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .health-title {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .health-value {
+            font-size: 20px;
+            font-weight: bold;
         }
     `
 };
@@ -249,9 +276,11 @@ function createServiceItem(service) {
     };
     
     div.onclick = () => {
+        // Remove active class from all services
         document.querySelectorAll('.service-item').forEach(item => {
             item.classList.remove('active');
         });
+        // Add active class to clicked service
         div.classList.add('active');
         connectToSignalR(service);
     };
