@@ -94,7 +94,7 @@
             background: none;
             cursor: pointer;
             color: #333;
-            font-size: 14px;
+            /* font-size: 14px; */ /* Removed to allow Tailwind class to control size */
             transition: background-color 0.2s;
         }
         .menu-item:hover {
@@ -164,12 +164,12 @@
         </div>
 
         <!-- Main Content Area -->
-        <div class="flex-1 p-8">
+        <div class="flex-1 px-8 pb-8 pt-4">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-2xl font-semibold text-gray-800">Service Health Monitor</h2>
                 <div class="flex items-center space-x-6">
                     <!-- Live indicator -->
-                    <span class="flex items-center text-sm text-green-600 bg-green-100 rounded-full px-3 py-1">
+                    <span class="flex items-center text-sm text-green-600 bg-green-100 rounded-md p-1.5">
                         <i data-lucide="zap" class="w-4 h-4 mr-1"></i>
                         Live
                     </span>
@@ -264,15 +264,15 @@
 
         <!-- Service Context Menu -->
         <div id="serviceContextMenu" class="absolute z-10 w-40 bg-white rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 focus:outline-none hidden">
-            <a href="#" class="flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 rounded-sm" data-action="rename">
+            <a href="#" class="flex items-center p-2 text-context-menu text-gray-700 hover:bg-gray-100 rounded-sm" data-action="rename">
                 <i data-lucide="edit" class="w-4 h-4 mr-2"></i>
                 Rename
             </a>
-            <a href="#" class="flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 rounded-sm" data-action="edit">
+            <a href="#" class="flex items-center p-2 text-context-menu text-gray-700 hover:bg-gray-100 rounded-sm" data-action="edit">
                 <i data-lucide="pencil" class="w-4 h-4 mr-2"></i>
                 Edit
             </a>
-            <a href="#" class="flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 rounded-sm" data-action="delete">
+            <a href="#" class="flex items-center p-2 text-context-menu text-gray-700 hover:bg-gray-100 rounded-sm" data-action="delete">
                 <i data-lucide="trash" class="w-4 h-4 mr-2"></i>
                 Delete
             </a>
